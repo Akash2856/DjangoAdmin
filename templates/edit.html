@@ -1,0 +1,17 @@
+{% extends "admin/base.html" %}
+{% block content %}
+
+    <form action="update" method="post">
+        {% csrf_token %}
+        <label for="id">id:</label><br>
+        <input type="text" id="id" name="id" required=""><br>
+        <label for="emp_id">emp_id:</label><br>
+        <input type="text" id="emp_id" name="emp_id"><br>
+        <label for="emp_first_name">emp_first_name:</label><br>
+        <input type="text" id="emp_first_name" name="emp_first_name"><br>
+        <label for="emp_last_name">emp_last_name:</label><br>
+        <input type="text" id="emp_last_name" name="emp_last_name"><br><br>
+        <input type="submit" value="Submit">
+        <input type="submit" value="Back" formaction="/polls/home1">
+      </form> 
+{% endblock %}

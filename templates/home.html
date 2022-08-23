@@ -1,0 +1,70 @@
+{% extends "admin/base.html" %}
+
+{% load static %}
+
+{% block content %}
+<style>
+    table, th, td {
+        border: 1px solid black;
+    }
+</style>
+
+<h1>home page</h1>
+<label for="cars">select option</label>
+
+<form action="home1" method="post">
+    {% csrf_token %}
+    <select id="table" name="q">
+        {% for table in tables %}
+        <option value="{{table}}">{{table}}</option>
+        {% endfor %}
+    </select>
+    <input type="submit">
+</form>
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+<table id="datatable">
+    <thead>
+        <tr>
+            {% for i in emp_header %}
+            <th>{{i}}</th>
+            {% endfor %}
+            <th> Delete</th>
+            <th>Edit</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for u in employe %}
+        <tr>
+            {% for v in u %}
+            <td>{{v}}</td>
+            {% endfor %}
+            <td>
+                <form action="delete" method="post">
+                    {% csrf_token %}
+                    <button type="submit" name="c" value="{{u}}"> delete</button>
+                </form>
+            </td>
+            <td>
+                <form action="edit" method="post">
+                    {% csrf_token %}
+                    <button type="submit" name="b" value="{{emp_header}}"> Edit</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+
+<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#datatable').DataTable(
+            
+        );
+    });
+</script>
+
+{% endblock %}
